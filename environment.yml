@@ -138,6 +138,10 @@ dependencies:
   - yarl=1.8.1=py37h5eee18b_0
   - zlib=1.2.13=hd590300_5
   - zstd=1.5.2=ha4553b6_0
+  - pytorch=1.12.1
+  - torchvision=0.13.1
+  - torchaudio=0.12.1
+  - cudatoolkit=10.2
   - pip:
       - allennlp==2.10.0
       - base58==2.1.1
@@ -217,9 +221,9 @@ dependencies:
       - thinc==8.0.17
       - tokenizers==0.12.1
       - tomli==2.0.1
-      - torch==1.12.1+cu102
-      - torchaudio==0.12.1+cu102
-      - torchvision==0.13.1+cu102
+      # - torch==1.12.1+cu102
+      # - torchaudio==0.12.1+cu102
+      # - torchvision==0.13.1+cu102
       - tqdm==4.64.0
       - traitlets==5.4.0
       - transformers==4.20.1
@@ -228,4 +232,3 @@ dependencies:
       - wandb==0.12.21
       - wasabi==0.10.1
       - zipp==3.8.1
-prefix: /home/jiaops/anaconda3/envs/lyjps

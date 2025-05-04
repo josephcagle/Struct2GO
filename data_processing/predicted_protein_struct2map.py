@@ -5,11 +5,18 @@ from Bio import SeqIO
 from Bio.PDB.PDBParser import PDBParser
 import os
 
+def un_gzip_inmem(gzip_file):
+    with gzip.open(gzip_file, 'rb') as f:
+        return f.read()
+
 def _load_cmap(filename, cmap_thresh=10.0):
         if filename.endswith('.pdb'):
             D, seq = load_predicted_PDB(filename)
             A = np.double(D < cmap_thresh)
             #print(A)
+        elif filename.endswith('.gz'):
+            D, seq = load_predicted_PDB(un_gzip_inmem(filename))
+            A = np.double(D < cmap_thresh)
         S = seq2onehot(seq)
         S = S.reshape(1, *S.shape)
         A = A.reshape(1, *A.shape)
@@ -55,7 +62,7 @@ def seq2onehot(seq):
 
     return seqs_x
 
-for path,dir_list,file_list in os.walk("/home/jiaops/lyjps/data/predicted_struct_protein_data"):  
+for path,dir_list,file_list in os.walk("data"):  
     for file_name in file_list:  
         A, S, seqres = _load_cmap(os.path.join(path, file_name),
                           cmap_thresh=10.0)

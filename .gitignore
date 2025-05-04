@@ -1,0 +1,10 @@
+lib
+bin
+pyvenv.cfg
+lib64
+share
+*/__pycache__/*
+*.pyc
+model/__pycache__/*
+data_processing/__pycache__/*
+nohup.out

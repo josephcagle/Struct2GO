@@ -32,7 +32,7 @@ import csv
 
 
 ## 序列数据，转为dataframe
-df = pd.read_excel('/home/jiaops/lyjps/data/seqdemo.xlsx')
+df = pd.read_excel('data/seqdemo.xlsx')
 seqs=dict(zip(df['Entry'], df['Sequence']))
 
 ##标签数据，确保标签和序列大小一致
@@ -50,7 +50,7 @@ namespace=collections.defaultdict(str)
 is_a=collections.defaultdict(list)
 part=collections.defaultdict(list)
 ###根据规则来提取go term ，并依据其之间的依赖关系构建图谱
-with open('/home/jiaops/lyjps/data/go.obo','r')as fin:
+with open('data/go.obo','r')as fin:
     for line in fin:
         if '[Typedef]' in line:
             break
@@ -115,7 +115,7 @@ for i in labels_with_go:
 #print(len(label_cc))
 #print(len(label_mf))
 
-df=pd.read_csv("/home/jiaops/lyjps/data/protein_list.csv",sep=" ")
+df=pd.read_csv("data/protein_list.csv",sep=" ")
 list1=df.values.tolist()
 protein_list = np.array(list1)
 print(protein_list.shape)
@@ -293,7 +293,7 @@ df.to_csv('gos_cc.csv', index=False)
 graph_dic_bp = {}
 graph_dic_mf = {}
 graph_dic_cc = {}
-for path,dir_list,file_list in os.walk("/home/jiaops/lyjps/data/proteins_edgs"):  
+for path,dir_list,file_list in os.walk("data/proteins_edgs"):  
     for file_name in file_list: 
         trace = os.path.join(path, file_name)
         name = file_name.split(".")[0]
@@ -308,11 +308,11 @@ for path,dir_list,file_list in os.walk("/home/jiaops/lyjps/data/proteins_edgs"):
 feature_dic_bp = {}
 feature_dic_mf = {}
 feature_dic_cc = {}
-with open('/home/jiaops/lyjps/processed_data/protein_node2onehot','rb')as f:
+with open('processed_data/protein_node2onehot','rb')as f:
     protein_node2onehot = pickle.load(f) 
 print(len(protein_node2onehot))
 
-for path,dir_list,file_list in os.walk("/home/jiaops/lyjps/data/struct_feature"):  
+for path,dir_list,file_list in os.walk("data/struct_feature"):  
     for file_name in file_list: 
         trace = os.path.join(path, file_name)
         name = file_name.split(".")[0]
@@ -332,7 +332,7 @@ for path,dir_list,file_list in os.walk("/home/jiaops/lyjps/data/struct_feature")
 
 
 
-with open('/home/jiaops/lyjps/processed_data/dict_sequence_feature','rb')as f:
+with open('processed_data/dict_sequence_feature','rb')as f:
     dict_sequence_feature = pickle.load(f)
 
 
@@ -355,13 +355,13 @@ for i in mf_entry:
     emb_seq_feature_mf[i] = torch.tensor(dict_sequence_feature[i].astype(np.float32))
     emb_label_mf[i] = labels
 
-with open('/home/jiaops/lyjps/processed_data/emb_graph_mf_without_Node2vec ','wb')as f:
+with open('processed_data/emb_graph_mf_without_Node2vec ','wb')as f:
     pickle.dump(emb_graph_mf,f)    
 
-# with open('/home/jiaops/lyjps/processed_data/emb_seq_feature_mf ','wb')as f:
+# with open('processed_data/emb_seq_feature_mf ','wb')as f:
 #     pickle.dump(emb_seq_feature_mf,f)    
 
-# with open('/home/jiaops/lyjps/processed_data/emb_label_mf ','wb')as f:
+# with open('processed_data/emb_label_mf ','wb')as f:
 #     pickle.dump(emb_label_mf,f)    
 
 
@@ -384,13 +384,13 @@ for i in cc_entry:
     emb_seq_feature_cc[i] = torch.tensor(dict_sequence_feature[i].astype(np.float32))
     emb_label_cc[i] = labels
 
-with open('/home/jiaops/lyjps/processed_data/emb_graph_cc_without_Node2vec ','wb')as f:
+with open('processed_data/emb_graph_cc_without_Node2vec ','wb')as f:
     pickle.dump(emb_graph_cc,f)    
 
-# with open('/home/jiaops/lyjps/processed_data/emb_seq_feature_cc ','wb')as f:
+# with open('processed_data/emb_seq_feature_cc ','wb')as f:
 #     pickle.dump(emb_seq_feature_cc,f)    
 
-# with open('/home/jiaops/lyjps/processed_data/emb_label_cc ','wb')as f:
+# with open('processed_data/emb_label_cc ','wb')as f:
 #     pickle.dump(emb_label_cc,f)    
 
 emb_graph_bp = {}
@@ -412,13 +412,13 @@ for i in bp_entry:
     emb_seq_feature_bp[i] = torch.tensor(dict_sequence_feature[i].astype(np.float32))
     emb_label_bp[i] = labels
 
-with open('/home/jiaops/lyjps/processed_data/emb_graph_bp_without_Node2vec','wb')as f:
+with open('processed_data/emb_graph_bp_without_Node2vec','wb')as f:
     pickle.dump(emb_graph_bp,f)    
 
-# with open('/home/jiaops/lyjps/processed_data/emb_seq_feature_bp ','wb')as f:
+# with open('processed_data/emb_seq_feature_bp ','wb')as f:
 #     pickle.dump(emb_seq_feature_bp,f)    
 
-# with open('/home/jiaops/lyjps/processed_data/emb_label_bp ','wb')as f:
+# with open('processed_data/emb_label_bp ','wb')as f:
 #     pickle.dump(emb_label_bp,f)    
 
 
@@ -437,7 +437,7 @@ for child, parents in is_a.items():
                 G3.add_edge(child_idx, parent_idx)
 
 
-with open('/home/jiaops/lyjps/processed_data/label_bp_network ','wb')as f:
+with open('processed_data/label_bp_network ','wb')as f:
     pickle.dump(G3,f)   
 
 G2 = dgl.DGLGraph()
@@ -454,7 +454,7 @@ for child, parents in is_a.items():
                 G2.add_edge(child_idx, parent_idx)
 
 
-with open('/home/jiaops/lyjps/processed_data/label_cc_network ','wb')as f:
+with open('processed_data/label_cc_network ','wb')as f:
     pickle.dump(G2,f) 
 
 
@@ -472,5 +472,5 @@ for child, parents in is_a.items():
                 G1.add_edge(child_idx, parent_idx)
 
 
-with open('/home/jiaops/lyjps/processed_data/label_mf_network ','wb')as f:
+with open('processed_data/label_mf_network ','wb')as f:
     pickle.dump(G1,f) 

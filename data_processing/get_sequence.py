@@ -43,13 +43,13 @@ def seq2onehot(seq):
     return seqs_x
 
 
-df=pd.read_csv("/home/jiaops/lyjps/data/protein_list.csv",sep=" ")
+df=pd.read_csv("data/protein_list.csv",sep=" ")
 list1=df.values.tolist()
 protein_list = np.array(list1)
 
 protein_node2one_hot = {}
 protein_sequence = {}
-for path,dir_list,file_list in os.walk("/home/jiaops/lyjps/data/predicted_struct_protein_data"):  
+for path,dir_list,file_list in os.walk("data/predicted_struct_protein_data"):  
     for file_name in file_list:
         filename = file_name.split('-')[1]
         if(filename in protein_list):   
@@ -57,7 +57,7 @@ for path,dir_list,file_list in os.walk("/home/jiaops/lyjps/data/predicted_struct
             protein_node2one_hot[filename] = S
             protein_sequence[filename] = seqres
 
-with open('/home/jiaops/lyjps/processed_data/protein_node2onehot','wb')as f:
+with open('processed_data/protein_node2onehot','wb')as f:
     pickle.dump(protein_node2one_hot,f)
-with open('/home/jiaops/lyjps/processed_data/protein_sequence','wb')as f:
+with open('processed_data/protein_sequence','wb')as f:
     pickle.dump(protein_sequence,f)    

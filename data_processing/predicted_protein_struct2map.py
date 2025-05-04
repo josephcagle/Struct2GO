@@ -4,19 +4,16 @@ import pandas as pd
 from Bio import SeqIO
 from Bio.PDB.PDBParser import PDBParser
 import os
+import gzip
 
-def un_gzip_inmem(gzip_file):
-    with gzip.open(gzip_file, 'rb') as f:
-        return f.read()
+            # with gzip.open(pdb_filename, 'rt') as unzipped:
+            #     structure = parser.get_structure(id_, unzipped)
 
 def _load_cmap(filename, cmap_thresh=10.0):
-        if filename.endswith('.pdb'):
-            D, seq = load_predicted_PDB(filename)
-            A = np.double(D < cmap_thresh)
+        assert filename.endswith('pdb.gz')
+        D, seq = load_predicted_PDB(filename, id=filename.split('/')[-1].split('.')[0])
+        A = np.double(D < cmap_thresh)
             #print(A)
-        elif filename.endswith('.gz'):
-            D, seq = load_predicted_PDB(un_gzip_inmem(filename))
-            A = np.double(D < cmap_thresh)
         S = seq2onehot(seq)
         S = S.reshape(1, *S.shape)
         A = A.reshape(1, *A.shape)
@@ -24,24 +21,21 @@ def _load_cmap(filename, cmap_thresh=10.0):
         return A, S, seq
 
 
-def load_predicted_PDB(pdbfile):
-    # Generate (diagonalized) C_alpha distance matrix from a pdbfile
+def load_predicted_PDB(pdbfile, id=None):
     parser = PDBParser()
-    structure = parser.get_structure(pdbfile.split('/')[-1].split('.')[0], pdbfile)
-    #name = structure.header['name']
-    #print(name)
-    residues = [r for r in structure.get_residues()]
+    with gzip.open(pdbfile, 'rt') as unzipped:
+        structure = parser.get_structure(id, unzipped)
+        # Extract residues
+        residues = [r for r in structure.get_residues()]
+        # Reset file pointer to beginning for SeqIO
+        unzipped.seek(0)
+        records = SeqIO.parse(unzipped, 'pdb-atom')
+        seqs = [str(r.seq) for r in records]
 
-    # sequence from atom lines
-    records = SeqIO.parse(pdbfile, 'pdb-atom')
-    seqs = [str(r.seq) for r in records]
-
-    distances = np.empty((len(residues), len(residues)))
-    for x in range(len(residues)):
-        for y in range(len(residues)):
-            one = residues[x]["CA"].get_coord()
-            two = residues[y]["CA"].get_coord()
-            distances[x, y] = np.linalg.norm(one-two)
+    # Vectorized calculation of pairwise distances between CA atoms
+    coords = np.array([r["CA"].get_coord() for r in residues])  # shape: (N, 3)
+    diff = coords[:, np.newaxis, :] - coords[np.newaxis, :, :]
+    distances = np.linalg.norm(diff, axis=-1)
 
     return distances, seqs[0]
 
@@ -62,32 +56,39 @@ def seq2onehot(seq):
 
     return seqs_x
 
-for path,dir_list,file_list in os.walk("data"):  
-    for file_name in file_list:  
-        A, S, seqres = _load_cmap(os.path.join(path, file_name),
-                          cmap_thresh=10.0)
-        print(A.shape)
-        print(len(A[0]))
-        B = np.reshape(A,(-1,len(A[0])))
-        result = []
-        N = len(B)
-        for i in range(N):
-            for j in range(N):
-                tmp1 = []
-                if B[i][j] and i!=j:
-                    tmp1.append(i)
-                    tmp1.append(j)
-                    result.append(tmp1)
-        np.array(result)
-        #print(result)
-        filename = file_name.split("-")
-        name = filename[1]
-        data = pd.DataFrame(result)
-        #index参数设置为False表示不保存行索引,header设置为False表示不保存列索引
-        data.to_csv("/home/jiaops/lyjps/data/proteins_edgs/" + name + ".txt",sep=" ",index=False,header=False)
-        #B_ = matrix2table(B)
-        #print(len(A))
-        #A_ = matrix2table()
+import sys
+sys.path.append(".")
+from parallelize import pqdm_map
+def process_file(file_path):
+    file_name = os.path.basename(file_path)
+    A, S, seqres = _load_cmap(file_path, cmap_thresh=10.0)
+    print(A.shape)
+    print(len(A[0]))
+    B = np.reshape(A, (-1, len(A[0])))
+    result = []
+    N = len(B)
+    for i in range(N):
+        for j in range(N):
+            tmp1 = []
+            if B[i][j] and i != j:
+                tmp1.append(i)
+                tmp1.append(j)
+                result.append(tmp1)
+    np.array(result)
+    filename = file_name.split("-")
+    name = filename[1]
+    data = pd.DataFrame(result)
+    data.to_csv(f"data/proteins_edgs/{name}.txt", sep=" ", index=False, header=False)
+
+# Gather all pdb.gz files
+file_paths = []
+for path, dir_list, file_list in os.walk("../APF/AlphaFold Data/raw_data"):
+    for file_name in file_list:
+        if file_name.endswith('pdb.gz'):
+            file_paths.append(os.path.join(path, file_name))
+
+# Process files in parallel using pqdm_map
+pqdm_map(process_file, file_paths, n_jobs=18)
 
 
 

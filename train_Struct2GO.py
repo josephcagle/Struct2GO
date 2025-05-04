@@ -56,11 +56,11 @@ if __name__ == "__main__":
     parser.add_argument('-batch_size', '--batch_size', type=int, default=1,  help="the number of the bach size")
     parser.add_argument('-learningrate', '--learningrate',type=float,default=5e-4)
     parser.add_argument('-dropout', '--dropout',type=float,default=0.45)
-    parser.add_argument('-train_data', '--train_data',type=str,default='/home/jiaops/lyjps/divided_data/mf_train_dataset')
-    parser.add_argument('-valid_data', '--valid_data',type=str,default='/home/jiaops/lyjps/divided_data/mf_valid_dataset')
+    parser.add_argument('-train_data', '--train_data',type=str,default='divided_data/mf_train_dataset')
+    parser.add_argument('-valid_data', '--valid_data',type=str,default='divided_data/mf_valid_dataset')
     parser.add_argument('-branch', '--branch',type=str,default='mf')
     parser.add_argument('-labels_num', '--labels_num',type=int,default=273)
-    parser.add_argument('-label_network', '--label_network', type=str, default='/home/jiaops/lyjps/processed_data/label_mf_network ')
+    parser.add_argument('-label_network', '--label_network', type=str, default='processed_data/label_mf_network ')
 
     args = parser.parse_args()
 
@@ -166,7 +166,7 @@ if __name__ == "__main__":
         #     best_fscore = each_best_fcore
         #     best_scores = each_best_scores
         #     best_score_dict = score_dict
-        #     torch.save(model, '/home/jiaops/lyjps/save_models/mymodel_{}_{}_{}_{}.pkl'.format(args.branch,batch_size,learningrate,dropout))
+        #     torch.save(model, 'save_models/mymodel_{}_{}_{}_{}.pkl'.format(args.branch,batch_size,learningrate,dropout))
         # t, f_score, recall = each_best_scores[0], each_best_scores[1], each_best_scores[2]
         # precision, auc_score = each_best_scores[3], each_best_scores[4] 
         # print('########training metric###########')
@@ -210,7 +210,7 @@ if __name__ == "__main__":
             best_fscore = each_best_fcore
             best_scores = each_best_scores
             best_score_dict = score_dict
-            torch.save(model, '/home/jiaops/lyjps/save_models/mymodel_{}_{}_{}_{}.pkl'.format(args.branch,batch_size,learningrate,dropout))
+            torch.save(model, 'save_models/mymodel_{}_{}_{}_{}.pkl'.format(args.branch,batch_size,learningrate,dropout))
         t, f_score, recall = each_best_scores[0], each_best_scores[1], each_best_scores[2]
         precision, auc_score = each_best_scores[3], each_best_scores[4] 
         print('########valid metric###########')
@@ -220,7 +220,7 @@ if __name__ == "__main__":
         #plt.plot(recall,precision,label = "num_convs="+str(num_convs))
 
     #plt.legend()
-    #plt.savefig('/home/jiaops/lyjps/processed_data/pr_num_convs.jpg')       
+    #plt.savefig('processed_data/pr_num_convs.jpg')       
 
         #fpr, tpr, th = roc_curve(np.array(actual).flatten(), np.array(pred).flatten(), pos_label=1)
         #auc_score = auc(fpr, tpr)

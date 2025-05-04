@@ -22,11 +22,11 @@ Thresholds = list(map(lambda x:round(x*0.01,2), list(range(1,100))))
 if __name__ == "__main__":
     #参数设置
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-test_data', '--test_data',type=str,default='/home/jiaops/lyjps/divided_data/mf_test_dataset')
+    parser.add_argument('-test_data', '--test_data',type=str,default='divided_data/mf_test_dataset')
     parser.add_argument('-branch', '--branch',type=str,default='mf')
-    parser.add_argument('-model','--model',type=str,default='/home/jiaops/lyjps/save_models/mymodel_mf_1_0.0005_0.45.pkl')
+    parser.add_argument('-model','--model',type=str,default='save_models/mymodel_mf_1_0.0005_0.45.pkl')
     parser.add_argument('-labels_num', '--labels_num',type=int,default=273)
-    parser.add_argument('-label_network', '--label_network', type=str, default='/home/jiaops/lyjps/processed_data/label_mf_network ')
+    parser.add_argument('-label_network', '--label_network', type=str, default='processed_data/label_mf_network ')
     args = parser.parse_args()
     labels_num = args.labels_num
     with open(args.test_data,'rb')as f:

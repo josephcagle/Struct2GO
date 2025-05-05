@@ -13,14 +13,15 @@ import java.io.File
 object Node2VecExample {
 
   def main(args: Array[String]): Unit = {
-      val path = new File("/Users/lyjps/Desktop/科研/人类蛋白质数据集/proteins_edgs")
-      for(name<- getFile(path)){
+      // Use Struct2GO edge list directory
+      println("hahahaha")
+      val path = new File("../../../data/proteins_edgs")
+      for(name <- getFile(path)) {
           val names1 = name.toString.split("/")
-          //val names2 = names1(7).toString.split(".")
           val params = ArgsUtil.parse(args)
           val input = params.getOrElse("input", name.toString)
-          //val input = params.getOrElse("input", "/Users/lyjps/Desktop/人类蛋白质数据集/protein_edges.txt")
-          val output = params.getOrElse("output", "/Users/lyjps/Desktop/angel-master/model/node2vec/" + names1(7))
+          // Output to node2vec directory, preserving filename
+          val output = params.getOrElse("output", "data/node2vec/" + names1.last.replace(".txt", ""))
           val batchSize = params.getOrElse("batchSize", "128").toInt
           val psPartNum = params.getOrElse("psPartNum", "2").toInt
           val dataPartNum = params.getOrElse("dataPartNum", "1").toInt

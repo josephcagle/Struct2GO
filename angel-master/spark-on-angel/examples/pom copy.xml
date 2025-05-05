@@ -14,7 +14,8 @@
   ~ or implied. See the License for the specific language governing permissions and limitations under
   ~ the License.
   ~
--->
+  -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -31,95 +32,72 @@
 
     <properties>
         <main.basedir>${project.parent.parent.basedir}</main.basedir>
-    </properties>
+    <scala.version>2.12.18</scala.version>
+    <scala.binary.version>2.12</scala.binary.version>
+</properties>
 
     <dependencies>
         <dependency>
             <groupId>com.tencent.angel</groupId>
             <artifactId>spark-on-angel-core</artifactId>
-            <version>${project.version}</version>
+            <version>3.2.0</version>
             <scope>${dist.deps.scope}</scope>
         </dependency>
         <dependency>
             <groupId>com.tencent.angel</groupId>
             <artifactId>spark-on-angel-mllib</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
+            <version>3.2.0</version>
+            <scope>${dist.deps.scope}</scope>
         </dependency>
         <dependency>
             <groupId>com.tencent.angel</groupId>
             <artifactId>spark-on-angel-graph</artifactId>
-            <version>${project.version}</version>
+            <version>3.2.0</version>
             <scope>${dist.deps.scope}</scope>
         </dependency>
         <dependency>
             <groupId>com.tencent.angel</groupId>
             <artifactId>angel-ps-mllib</artifactId>
-            <version>${project.version}</version>
+            <version>3.2.0</version>
             <scope>${dist.deps.scope}</scope>
         </dependency>
         <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>2.11.8</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_2.11</artifactId>
-            <version>2.4.0</version>
-            <scope>${dist.deps.scope}</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_2.11</artifactId>
-            <version>2.4.0</version>
-            <scope>${dist.deps.scope}</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
-            <version>2.4.0</version>
-            <scope>${dist.deps.scope}</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_2.11</artifactId>
-            <version>3.0.5</version>
-            <scope>test</scope>
-        </dependency>
+        <groupId>org.scala-lang</groupId>
+        <artifactId>scala-library</artifactId>
+        <version>2.12.18</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-core_2.11</artifactId>
+        <version>3.2.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming_2.11</artifactId>
+        <version>3.2.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- Fix spark-streaming-kafka -->
+    <dependency>
+        <groupId>org.apache.spark</groupId>
+        <artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
+        <version>2.4.0</version>
+        <scope>provided</scope>
+    </dependency>
+    <!-- Fix scalatest -->
+    <dependency>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest_2.11</artifactId>
+        <version>3.0.5</version>
+        <scope>test</scope>
+    </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-                <version>4.8.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <scalaVersion>2.11.8</scalaVersion>
-                    <recompileMode>incremental</recompileMode>
-                    <args>
-                        <arg>-unchecked</arg>
-                        <arg>-deprecation</arg>
-                        <arg>-feature</arg>
-                    </args>
-                    <jvmArgs>
-                        <jvmArg>-Xms1024m</jvmArg>
-                        <jvmArg>-Xmx3g</jvmArg>
-                    </jvmArgs>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>angel</id>

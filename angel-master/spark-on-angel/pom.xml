@@ -160,9 +160,9 @@
 					</jvmArgs>
 					<javacArgs>
 						<javacArg>-source</javacArg>
-						<javacArg>1.7</javacArg>
+						<javacArg>1.8</javacArg>
 						<javacArg>-target</javacArg>
-						<javacArg>1.7</javacArg>
+						<javacArg>1.8</javacArg>
 						<javacArg>-Xlint:all,-serial,-path</javacArg>
 					</javacArgs>
 				</configuration>

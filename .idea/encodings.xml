@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/examples/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/examples/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/examples/target/generated-sources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/graph/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/graph/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/mllib/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/mllib/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/psf/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/psf/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/target/generated-sources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/tools/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/angel-ps/tools/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/dist/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/dist/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/examples/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/examples/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/graph/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/graph/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/mllib/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/mllib/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/spark-on-angel/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/angel-master/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

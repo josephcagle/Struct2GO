@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spark-on-angel-graph" />
+        <module name="angel-ps-mllib" />
+        <module name="angel-ps-examples" />
+        <module name="angel-ps-tools" />
+        <module name="angel-ps-psf" />
+        <module name="angel-ps-core" />
+        <module name="angel-ps-graph" />
+        <module name="spark-on-angel-mllib" />
+        <module name="angel-dist" />
+        <module name="spark-on-angel-core" />
+        <module name="spark-on-angel-examples" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="spark-on-angel" options="-Xlint:all,-serial,-path" />
+      <module name="spark-on-angel-core" options="-Xlint:all,-serial,-path" />
+      <module name="spark-on-angel-examples" options="-Xlint:all,-serial,-path" />
+      <module name="spark-on-angel-graph" options="-Xlint:all,-serial,-path" />
+      <module name="spark-on-angel-mllib" options="-Xlint:all,-serial,-path" />
+    </option>
+  </component>
+</project>
